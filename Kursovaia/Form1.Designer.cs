@@ -32,6 +32,7 @@
             label1 = new Label();
             complexity = new Button();
             HowPlay = new Button();
+            Exit = new Button();
             SuspendLayout();
             // 
             // Play
@@ -70,12 +71,24 @@
             HowPlay.TabIndex = 3;
             HowPlay.Text = "Как играть?";
             HowPlay.UseVisualStyleBackColor = true;
+            HowPlay.Click += HowPlay_Click_1;
+            // 
+            // Exit
+            // 
+            Exit.Location = new Point(372, 422);
+            Exit.Name = "Exit";
+            Exit.Size = new Size(266, 73);
+            Exit.TabIndex = 4;
+            Exit.Text = "Выход";
+            Exit.UseVisualStyleBackColor = true;
+            Exit.Click += Exit_Click;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1054, 611);
+            ClientSize = new Size(1019, 611);
+            Controls.Add(Exit);
             Controls.Add(HowPlay);
             Controls.Add(complexity);
             Controls.Add(label1);
@@ -93,5 +106,6 @@
         private Label label1;
         private Button complexity;
         private Button HowPlay;
+        private Button Exit;
     }
 }

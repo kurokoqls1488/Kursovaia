@@ -1,9 +1,6 @@
-﻿using System;
-using System.Drawing;
-using System.Windows.Forms;
-
-namespace Kursovaia
+﻿namespace Kursovaia
 {
+
     public partial class Saper : Form
     {
         private const int Rows = 20;
@@ -17,6 +14,7 @@ namespace Kursovaia
         {
             InitializeComponent();
             InitializeGame();
+            this.StartPosition = FormStartPosition.CenterScreen; // Центрируем форму на экране
         }
 
         private void InitializeGame()
@@ -128,7 +126,7 @@ namespace Kursovaia
                 buttons[row, col].BackgroundImage = Image.FromFile(imagePath);
                 buttons[row, col].BackgroundImageLayout = ImageLayout.Stretch; // Установить растяжение изображения
                 buttons[row, col].Enabled = false; // Открыть клетку
-                MessageBox.Show("Game Over!");
+                MessageBox.Show("Игра окончена! Вы проиграли");
                 isGameOver = true;
                 return;
             }
@@ -152,6 +150,12 @@ namespace Kursovaia
                     }
                 }
             }
+        }
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            Form1 form1 = new Form1();
+            form1.Show();
+            this.Hide();
         }
     }
 }
