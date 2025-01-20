@@ -17,7 +17,7 @@ namespace Kursovaia
             InitializeComponent();
             this.FormBorderStyle = FormBorderStyle.None; // Убираем рамку и кнопки
             this.StartPosition = FormStartPosition.Manual; // Устанавливаем ручное позиционирование
-            this.Location = new Point(40, 40); // Устанавливаем положение в верхний левый угол
+            this.Location = new Point(40, 40); // Устанавливаем положение в верхний левый угол .
         }
 
         private void BackToMenu_Click(object sender, EventArgs e)
