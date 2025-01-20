@@ -2,9 +2,11 @@ namespace Kursovaia
 {
     public partial class Form1 : Form
     {
-        public Form1()
+        private int difficult;
+        public Form1(int difficult)
         {
             InitializeComponent();
+            this.difficult = difficult;
             this.FormBorderStyle = FormBorderStyle.None; // Убираем рамку и кнопки
             this.StartPosition = FormStartPosition.CenterScreen; // Центрируем форму на экране
         }
@@ -16,7 +18,7 @@ namespace Kursovaia
 
         private void Play_Click(object sender, EventArgs e)
         {
-            Saper saperForm = new Saper();
+            Saper saperForm = new Saper(difficult);
             saperForm.Show();
             this.Hide();
         }
@@ -36,6 +38,7 @@ namespace Kursovaia
         {
             complexity complexityForm = new complexity();
             complexityForm.Show();
+            this.Hide();
         }
     }
 }

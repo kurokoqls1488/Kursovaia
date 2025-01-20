@@ -1,24 +1,63 @@
-﻿namespace Kursovaia
+﻿using System.Runtime.CompilerServices;
+
+namespace Kursovaia
 {
 
     public partial class Saper : Form
     {
-        private const int Rows = 20;
-        private const int Columns = 20;
-        private const int Bombs = 30; // 20% бомб
-        private Button[,] buttons = new Button[Rows, Columns];
-        private int[,] board = new int[Rows, Columns];
+        private int difficult;
+        private int Rows;
+        private int Columns;
+        private int Bombs; // Количество бомб
+        private Button[,] buttons;
+        private int[,] board;
         private bool isGameOver = false;
 
-        public Saper()
+        public Saper(int difficult)
         {
             InitializeComponent();
+            SetDifficulty(difficult);
+            this.difficult = difficult;
             InitializeGame();
             this.StartPosition = FormStartPosition.CenterScreen; // Центрируем форму на экране
         }
 
+        private void SetDifficulty(int difficult)
+        {
+            switch (difficult)
+            {
+                case 1:
+                    Rows = 10;
+                    Columns = 10;
+                    Bombs = 10; // 10 бомб
+                    this.Size = new Size(476, 498);
+                    break;
+                case 2:
+                    Rows = 15;
+                    Columns = 15;
+                    Bombs = 30; // 30 бомб
+                    this.Size = new Size(706, 728);
+                    break;
+                case 3:
+                    Rows = 20;
+                    Columns = 20;
+                    Bombs = 50; // 50 бомб
+                    this.Size = new Size(936, 958);
+                    break;
+                case 4:
+                    Rows = 22;
+                    Columns = 40;
+                    Bombs = 100; // 100 бомб
+                    this.Size = new Size(1100, 1100);
+                    break;
+            }
+        }
+
         private void InitializeGame()
         {
+            buttons = new Button[Rows, Columns];
+            board = new int[Rows, Columns];
+
             TableLayoutPanel tableLayout = new TableLayoutPanel
             {
                 Dock = DockStyle.Fill,
@@ -125,16 +164,11 @@
                 string imagePath = Path.Combine(Application.StartupPath, "bomba.png");
                 buttons[row, col].BackgroundImage = Image.FromFile(imagePath);
                 buttons[row, col].BackgroundImageLayout = ImageLayout.Stretch; // Установить растяжение изображения
-                buttons[row, col].Enabled = false; // Открыть клетку
                 MessageBox.Show("Игра окончена! Вы проиграли");
                 isGameOver = true;
 
-                // Создаем новый экземпляр Form1 и показываем его
-                Form1 form1 = new Form1();
-                form1.Show(); // Показываем Form1
-                this.Hide(); // Скрываем текущую форму (Saper)
-
-
+                // Закрываем текущую форму
+                this.Close();
                 return;
             }
 
@@ -146,7 +180,7 @@
             else
             {
                 buttons[row, col].Text = ""; // Удалить текст, если нет соседних мин
-                                             // Если нет соседних бомб, открываем соседние клетки
+                // Если нет соседних бомб, открываем соседние клетки
                 for (int x = -1; x <= 1; x++)
                 {
                     for (int y = -1; y <= 1; y++)
@@ -160,7 +194,7 @@
         }
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
-            Form1 form1 = new Form1();
+            Form1 form1 = new Form1(difficult);
             form1.Show();
             this.Hide();
         }

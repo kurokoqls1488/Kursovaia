@@ -34,7 +34,7 @@
             radioButton3 = new RadioButton();
             radioButton2 = new RadioButton();
             radioButton1 = new RadioButton();
-            BackToMenu = new Button();
+            SaveCompletixy = new Button();
             labelComplexity = new Label();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
@@ -56,7 +56,7 @@
             panel2.Controls.Add(radioButton3);
             panel2.Controls.Add(radioButton2);
             panel2.Controls.Add(radioButton1);
-            panel2.Controls.Add(BackToMenu);
+            panel2.Controls.Add(SaveCompletixy);
             panel2.Dock = DockStyle.Fill;
             panel2.Location = new Point(0, 78);
             panel2.Name = "panel2";
@@ -105,16 +105,16 @@
             radioButton1.Text = "Легко";
             radioButton1.UseVisualStyleBackColor = true;
             // 
-            // BackToMenu
+            // SaveCompletixy
             // 
-            BackToMenu.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            BackToMenu.Location = new Point(36, 271);
-            BackToMenu.Name = "BackToMenu";
-            BackToMenu.Size = new Size(266, 73);
-            BackToMenu.TabIndex = 3;
-            BackToMenu.Text = "Назад";
-            BackToMenu.UseVisualStyleBackColor = true;
-            BackToMenu.Click += BackToMenu_Click;
+            SaveCompletixy.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            SaveCompletixy.Location = new Point(36, 271);
+            SaveCompletixy.Name = "SaveCompletixy";
+            SaveCompletixy.Size = new Size(266, 73);
+            SaveCompletixy.TabIndex = 3;
+            SaveCompletixy.Text = "Сохранить";
+            SaveCompletixy.UseVisualStyleBackColor = true;
+            SaveCompletixy.Click += SaveCompletixy_Click;
             // 
             // labelComplexity
             // 
@@ -133,6 +133,8 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(339, 450);
             Controls.Add(panel1);
+            MaximizeBox = false;
+            MinimizeBox = false;
             Name = "complexity";
             Text = "complexity";
             panel1.ResumeLayout(false);
@@ -148,7 +150,7 @@
         private RadioButton radioButton3;
         private RadioButton radioButton2;
         private RadioButton radioButton1;
-        private Button BackToMenu;
+        private Button SaveCompletixy;
         private RadioButton radioButton4;
     }
 }
