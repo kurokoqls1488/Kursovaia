@@ -1,10 +1,17 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System;
+using System.Drawing;
+using System.IO;
+using System.Windows.Forms;
 
 namespace Kursovaia
 {
 
     public partial class Saper : Form
     {
+        private System.Windows.Forms.Timer timer;
+        private int secondsElapsed = 0; // Счетчик секунд
+
+
         private int difficult;
         private int Rows;
         private int Columns;
@@ -12,7 +19,7 @@ namespace Kursovaia
         private Button[,] buttons;
         private int[,] board;
         private bool isGameOver = false;
-
+        
         public Saper(int difficult)
         {
             InitializeComponent();
@@ -29,13 +36,13 @@ namespace Kursovaia
                 case 1:
                     Rows = 10;
                     Columns = 10;
-                    Bombs = 15; // 15 бомб
+                    Bombs = 5; // 5 бомб
                     this.Size = new Size(476, 498);
                     break;
                 case 2:
                     Rows = 15;
                     Columns = 15;
-                    Bombs = 50; // 50 бомб
+                    Bombs = 40; // 40 бомб
                     this.Size = new Size(706, 728);
                     break;
                 case 3:
@@ -88,6 +95,17 @@ namespace Kursovaia
             PlaceBombs();
             // Подсчет количества соседних бомб для каждой клетки
             CalculateAdjacentBombs();
+
+            // Инициализация таймера
+            timer = new System.Windows.Forms.Timer();
+            timer.Interval = 1000; // 1 секунда
+            timer.Tick += Timer_Tick;
+            timer.Start(); // Запуск таймера
+        }
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            secondsElapsed++; // Увеличиваем счетчик секунд
+            this.Text = $"Saper - Время: {secondsElapsed} секунд"; // Обновляем заголовок формы
         }
         private void Button_MouseDown(object sender, MouseEventArgs e)
         {
@@ -206,9 +224,10 @@ namespace Kursovaia
                 string imagePath = Path.Combine(Application.StartupPath, "bomba.png");
                 buttons[row, col].BackgroundImage = Image.FromFile(imagePath);
                 buttons[row, col].BackgroundImageLayout = ImageLayout.Stretch; // Установить растяжение изображения
+                timer.Stop(); // Остановить таймер
                 MessageBox.Show("Игра окончена! Вы проиграли");
                 isGameOver = true;
-
+                
                 // Закрываем текущую форму
                 this.Close();
                 return;
@@ -239,8 +258,10 @@ namespace Kursovaia
             // Проверяем условие победы
             if (openedCells == Rows * Columns - Bombs)
             {
-                MessageBox.Show("Поздравляем! Вы выиграли!");
+                timer.Stop(); // Остановить таймер
+                MessageBox.Show($"Поздравляем! Вы выиграли за {secondsElapsed} секунд!");
                 isGameOver = true;
+                
                 this.Close(); // Закрываем форму после победы
             }
 
