@@ -29,26 +29,26 @@ namespace Kursovaia
                 case 1:
                     Rows = 10;
                     Columns = 10;
-                    Bombs = 10; // 10 бомб
+                    Bombs = 15; // 15 бомб
                     this.Size = new Size(476, 498);
                     break;
                 case 2:
                     Rows = 15;
                     Columns = 15;
-                    Bombs = 30; // 30 бомб
+                    Bombs = 50; // 50 бомб
                     this.Size = new Size(706, 728);
                     break;
                 case 3:
                     Rows = 20;
                     Columns = 20;
-                    Bombs = 50; // 50 бомб
+                    Bombs = 100; // 100 бомб
                     this.Size = new Size(936, 958);
                     break;
                 case 4:
                     Rows = 22;
                     Columns = 40;
-                    Bombs = 100; // 100 бомб
-                    this.Size = new Size(1100, 1100);
+                    Bombs = 300; // 300 бомб
+                    this.Size = new Size(1856, 1600);
                     break;
             }
         }
@@ -69,18 +69,50 @@ namespace Kursovaia
             {
                 for (int j = 0; j < Columns; j++)
                 {
+                    // Создание новой кнопки
                     buttons[i, j] = new Button
                     {
-                        Size = new Size(40, 40),
-                        BackColor = Color.LightGray
+                        Size = new Size(40, 40), // Установка размера кнопки
+                        BackColor = Color.LightGray // Установка фона кнопки
                     };
+                    // Подписка на событие клика по кнопке
                     buttons[i, j].Click += Button_Click;
+
+                    buttons[i, j].MouseDown += Button_MouseDown;
                     tableLayout.Controls.Add(buttons[i, j], j, i);
                 }
             }
+            // Добавление таблицы на форму
             this.Controls.Add(tableLayout);
+            // Размещение бомб на игровом поле
             PlaceBombs();
+            // Подсчет количества соседних бомб для каждой клетки
             CalculateAdjacentBombs();
+        }
+        private void Button_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right) // Проверяем, была ли нажата правая кнопка мыши
+            {
+                Button clickedButton = sender as Button;
+                if (clickedButton != null) // Проверяем, что кнопка не равна null
+                {
+                    // Проверяем, есть ли уже изображение флага
+                    if (clickedButton.BackgroundImage != null)
+                    {
+                        // Убираем флаг
+                        clickedButton.BackgroundImage = null;
+                        clickedButton.Enabled = true; // Делаем кнопку активной
+                    }
+                    else if (clickedButton.Enabled) // Если кнопка активна и флага нет
+                    {
+                        // Установка изображения флага
+                        string flagImagePath = Path.Combine(Application.StartupPath, "Flag.png");
+                        clickedButton.BackgroundImage = Image.FromFile(flagImagePath);
+                        clickedButton.BackgroundImageLayout = ImageLayout.Stretch; // Установить растяжение изображения
+                        //clickedButton.Enabled = false; // Делаем кнопку неактивной, чтобы нельзя было открыть клетку
+                    }
+                }
+            }
         }
 
         private void PlaceBombs()
@@ -98,28 +130,37 @@ namespace Kursovaia
                 }
             }
         }
-
+        
         private void CalculateAdjacentBombs()
         {
             for (int i = 0; i < Rows; i++)
             {
                 for (int j = 0; j < Columns; j++)
                 {
-                    if (board[i, j] != -1) // Если не бомба
+                    if (board[i, j] != -1) // Если текущая клетка не содержит бомбу
                     {
-                        int count = 0;
-                        for (int x = -1; x <= 1; x++)
+                        int count = 0; // Инициализация счетчика для подсчета соседних бомб
+                                       // Циклы для проверки всех соседних клеток (всего 8 соседей)
+                        
+                        for (int x = -1; x <= 1; x++) // Перебор по строкам соседей
                         {
-                            for (int y = -1; y <= 1; y++)
+                            for (int y = -1; y <= 1; y++) // Перебор по столбцам соседей
                             {
+                                // Проверка, находится ли соседняя клетка в пределах игрового поля
+                                // и содержит ли она бомбу
                                 if (IsInBounds(i + x, j + y) && board[i + x, j + y] == -1)
-                                    count++;
+                                    count++; // Увеличиваем счетчик, если соседняя клетка - бомба
+                                
                             }
                         }
                         board[i, j] = count; // Установка количества соседних бомб
+                        //Добавляем в счетчик если не бомба
+
                     }
                 }
             }
+
+            
         }
 
         private bool IsInBounds(int row, int col)
@@ -150,13 +191,14 @@ namespace Kursovaia
             }
             return Point.Empty;
         }
-
+        private int openedCells = 0;
         private void OpenCell(int row, int col)
         {
             if (!IsInBounds(row, col) || buttons[row, col].Enabled == false || isGameOver)
                 return;
 
             buttons[row, col].Enabled = false; // Открыть клетку
+            buttons[row, col].BackgroundImage = null;
             buttons[row, col].BackColor = Color.DarkGray; // Задать цвет при раскрытии клетки
 
             if (board[row, col] == -1) // Бомба
@@ -191,6 +233,18 @@ namespace Kursovaia
                     }
                 }
             }
+            // Увеличиваем количество открытых клеток
+            openedCells++;
+
+            // Проверяем условие победы
+            if (openedCells == Rows * Columns - Bombs)
+            {
+                MessageBox.Show("Поздравляем! Вы выиграли!");
+                isGameOver = true;
+                this.Close(); // Закрываем форму после победы
+            }
+
+
         }
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
@@ -198,5 +252,8 @@ namespace Kursovaia
             form1.Show();
             this.Hide();
         }
+
+        
+
     }
 }
