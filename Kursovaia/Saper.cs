@@ -85,10 +85,13 @@ namespace Kursovaia
                     // Подписка на событие клика по кнопке
                     buttons[i, j].Click += Button_Click;
 
+                    buttons[i, j].TabStop = false; // Убираю фокус
+
                     buttons[i, j].MouseDown += Button_MouseDown;
                     tableLayout.Controls.Add(buttons[i, j], j, i);
                 }
             }
+
             // Добавление таблицы на форму
             this.Controls.Add(tableLayout);
             // Размещение бомб на игровом поле
@@ -192,7 +195,7 @@ namespace Kursovaia
 
             Button clickedButton = sender as Button;
             Point position = GetButtonPosition(clickedButton);
-            if (position == Point.Empty) return;
+            //if (position == Point.Empty) return;
 
             OpenCell(position.X, position.Y);
         }
