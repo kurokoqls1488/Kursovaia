@@ -40,5 +40,18 @@ namespace Kursovaia
             complexityForm.Show();
             this.Hide();
         }
+
+
+        private void Play_MouseEnter(object sender, EventArgs e)
+        {
+            var button = sender as Button;
+            button.BackgroundImage = Image.FromFile(Path.Combine(Application.StartupPath, "buttonFonLight.png"));
+        }
+
+        private void Play_MouseLeave(object sender, EventArgs e)
+        {
+            var button = sender as Button;
+            button.BackgroundImage = Image.FromFile(Path.Combine(Application.StartupPath, "buttonFon.png"));
+        }
     }
 }

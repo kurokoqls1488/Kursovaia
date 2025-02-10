@@ -1,9 +1,4 @@
-﻿using System;
-using System.Drawing;
-using System.IO;
-using System.Windows.Forms;
-
-namespace Kursovaia
+﻿namespace Kursovaia
 {
 
     public partial class Saper : Form
@@ -48,13 +43,13 @@ namespace Kursovaia
                 case 3:
                     Rows = 20;
                     Columns = 20;
-                    Bombs = 100; // 100 бомб
+                    Bombs = 80; // 100 бомб
                     this.Size = new Size(936, 958);
                     break;
                 case 4:
                     Rows = 22;
                     Columns = 40;
-                    Bombs = 300; // 300 бомб
+                    Bombs = 200; // 300 бомб
                     this.Size = new Size(1856, 1600);
                     break;
             }
@@ -62,6 +57,9 @@ namespace Kursovaia
 
         private void InitializeGame()
         {
+            
+
+
             buttons = new Button[Rows, Columns];
             board = new int[Rows, Columns];
 
@@ -104,6 +102,9 @@ namespace Kursovaia
             timer.Interval = 1000; // 1 секунда
             timer.Tick += Timer_Tick;
             timer.Start(); // Запуск таймера
+
+
+            
         }
         private void Timer_Tick(object sender, EventArgs e)
         {
@@ -212,6 +213,22 @@ namespace Kursovaia
             }
             return Point.Empty;
         }
+        private void RevealBombs() // метод для открытия бомб после поражения
+        {
+            for (int i = 0; i < Rows; i++)
+            {
+                for (int j = 0; j < Columns; j++)
+                {
+                    if (board[i, j] == -1) // Если это бомба
+                    {
+                        string imagePath = Path.Combine(Application.StartupPath, "bomba.png");
+                        buttons[i, j].BackgroundImage = Image.FromFile(imagePath);
+                        buttons[i, j].BackgroundImageLayout = ImageLayout.Stretch; // Установить растяжение изображения
+                        buttons[i, j].Enabled = false; // Делаем кнопку неактивной
+                    }
+                }
+            }
+        }
         private int openedCells = 0;
         private void OpenCell(int row, int col)
         {
@@ -228,11 +245,13 @@ namespace Kursovaia
                 buttons[row, col].BackgroundImage = Image.FromFile(imagePath);
                 buttons[row, col].BackgroundImageLayout = ImageLayout.Stretch; // Установить растяжение изображения
                 timer.Stop(); // Остановить таймер
+
                 MessageBox.Show("Игра окончена! Вы проиграли");
+                RevealBombs(); // Открываем все бомбы
+
                 isGameOver = true;
-                
-                // Закрываем текущую форму
-                this.Close();
+
+
                 return;
             }
 

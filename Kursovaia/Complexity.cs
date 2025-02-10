@@ -24,7 +24,7 @@ namespace Kursovaia
 
 
 
-       
+
 
         private void SaveCompletixy_Click(object sender, EventArgs e)
         {
@@ -36,6 +36,23 @@ namespace Kursovaia
             Form1 menu = new Form1(difficult);
             this.Hide();
             menu.ShowDialog();
+        }
+
+        private void Play_MouseEnter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void SaveCompletixy_MouseLeave(object sender, EventArgs e)
+        {
+            var button = sender as Button;
+            button.BackgroundImage = Image.FromFile(Path.Combine(Application.StartupPath, "buttonFon.png"));
+        }
+
+        private void SaveCompletixy_MouseEnter(object sender, EventArgs e)
+        {
+            var button = sender as Button;
+            button.BackgroundImage = Image.FromFile(Path.Combine(Application.StartupPath, "buttonFonLight.png"));
         }
     }
 }
