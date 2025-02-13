@@ -68,7 +68,7 @@
             // radioButton4
             // 
             radioButton4.BackColor = Color.Transparent;
-            radioButton4.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            radioButton4.Font = new Font("Segoe UI Black", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
             radioButton4.ForeColor = Color.White;
             radioButton4.Location = new Point(36, 195);
             radioButton4.Name = "radioButton4";
@@ -80,7 +80,7 @@
             // radioButton3
             // 
             radioButton3.BackColor = Color.Transparent;
-            radioButton3.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            radioButton3.Font = new Font("Segoe UI Black", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
             radioButton3.ForeColor = Color.White;
             radioButton3.Location = new Point(36, 131);
             radioButton3.Name = "radioButton3";
@@ -92,7 +92,7 @@
             // radioButton2
             // 
             radioButton2.BackColor = Color.Transparent;
-            radioButton2.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            radioButton2.Font = new Font("Segoe UI Black", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
             radioButton2.ForeColor = Color.White;
             radioButton2.Location = new Point(36, 67);
             radioButton2.Name = "radioButton2";
@@ -105,7 +105,7 @@
             // 
             radioButton1.BackColor = Color.Transparent;
             radioButton1.Checked = true;
-            radioButton1.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            radioButton1.Font = new Font("Segoe UI Black", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
             radioButton1.ForeColor = Color.White;
             radioButton1.Location = new Point(36, 3);
             radioButton1.Name = "radioButton1";

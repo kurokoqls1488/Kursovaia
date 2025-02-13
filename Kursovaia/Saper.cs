@@ -37,19 +37,19 @@
                 case 2:
                     Rows = 15;
                     Columns = 15;
-                    Bombs = 40; // 40 бомб
+                    Bombs = 30; // 40 бомб
                     this.Size = new Size(706, 728);
                     break;
                 case 3:
                     Rows = 20;
                     Columns = 20;
-                    Bombs = 80; // 100 бомб
+                    Bombs = 60; // 100 бомб
                     this.Size = new Size(936, 958);
                     break;
                 case 4:
                     Rows = 22;
                     Columns = 40;
-                    Bombs = 200; // 300 бомб
+                    Bombs = 130; // 300 бомб
                     this.Size = new Size(1856, 1600);
                     break;
             }
