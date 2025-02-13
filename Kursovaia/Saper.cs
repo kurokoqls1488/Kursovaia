@@ -78,7 +78,7 @@
                     buttons[i, j] = new Button
                     {
                         Size = new Size(40, 40), // Установка размера кнопки
-                        BackColor = Color.LightGray // Установка фона кнопки
+                        BackColor = Color.DarkOrange // Установка фона кнопки
                     };
                     // Подписка на событие клика по кнопке
                     buttons[i, j].Click += Button_Click;
@@ -87,7 +87,9 @@
 
                     buttons[i, j].MouseDown += Button_MouseDown;
                     tableLayout.Controls.Add(buttons[i, j], j, i);
+
                 }
+
             }
 
             // Добавление таблицы на форму
@@ -237,7 +239,7 @@
 
             buttons[row, col].Enabled = false; // Открыть клетку
             buttons[row, col].BackgroundImage = null;
-            buttons[row, col].BackColor = Color.DarkGray; // Задать цвет при раскрытии клетки
+            buttons[row, col].BackColor = Color.BlanchedAlmond; // Задать цвет при раскрытии клетки
 
             if (board[row, col] == -1) // Бомба
             {

@@ -44,7 +44,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(250, 209, 207);
+            BackColor = Color.PeachPuff;
             ClientSize = new Size(446, 594);
             Controls.Add(label1);
             Name = "HowPlay";
