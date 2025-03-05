@@ -116,7 +116,7 @@
         private void Button_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right) // Проверяем, была ли нажата правая кнопка мыши
-            {
+            { 
                 Button clickedButton = sender as Button;
                 if (clickedButton != null) // Проверяем, что кнопка не равна null
                 {
@@ -155,7 +155,7 @@
             }
         }
         
-        private void CalculateAdjacentBombs()
+        private void CalculateAdjacentBombs() //Метод для счетчика бомб вокруг
         {
             for (int i = 0; i < Rows; i++)
             {
@@ -232,7 +232,7 @@
             }
         }
         private int openedCells = 0;
-        private void OpenCell(int row, int col)
+        private void OpenCell(int row, int col) //Метод для обработки открытия клетки в игре и для победы
         {
             if (!IsInBounds(row, col) || buttons[row, col].Enabled == false || isGameOver)
                 return;
