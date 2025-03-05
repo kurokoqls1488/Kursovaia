@@ -4,7 +4,7 @@
     public partial class Saper : Form
     {
         private System.Windows.Forms.Timer timer;
-        private int secondsElapsed = 0; // Счетчик секунд
+        private int secondsElapsed = 0; // Счетчик секунд.
 
 
         private int difficult;
